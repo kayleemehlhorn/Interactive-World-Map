@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { WorldMapComponent } from "./world-map/world-map.component";
+import { WorldMapComponent } from './components/world-map/world-map.component';
 
 
 

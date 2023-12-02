@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-world-map',
   standalone: true,
   imports: [],
-  templateUrl: './world-map.component.html',
+  templateUrl: '../../../assets/world.svg',
   styleUrl: './world-map.component.scss'
 })
 export class WorldMapComponent {
