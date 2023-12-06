@@ -8,19 +8,13 @@ import { Component } from '@angular/core'
   styleUrls: ['./world-map.component.scss']
 })
 export class WorldMapComponent {
-  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-  onHover (): void {
-    throw new Error('Method not implemented.')
-  }
+  private id: string = ''
+  private title: string = ''
+  setWorldMapInfo (event: MouseEvent): void {
+    const svgPathElement = event.target as SVGElement
+    this.id = svgPathElement.id
+    this.title = svgPathElement.getAttribute('title')!
 
-  id: string = ''
-  title: string = ''
-  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-  setWorldMapInfo (event: any): void {
-    this.id = event.target.id
-    this.title = event.target.getAttribute('title')
-
-    console.log('ID', this.id)
-    console.log('Title', this.title)
+    console.log({ id: this.id, title: this.title })
   }
 }
