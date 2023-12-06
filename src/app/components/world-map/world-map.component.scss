@@ -2,6 +2,22 @@ svg path {
   cursor: pointer;
 
   &:hover {
-    fill: teal; /* Apply your hover effect */
+    fill: teal;
   }
+}
+
+main {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-top: 10%;
+  max-width: 100%;
+}
+
+.world-info {
+  text-align: center;
+  border-radius: 25px;
+  background-color: bisque;
+  width: 15%;
 }
