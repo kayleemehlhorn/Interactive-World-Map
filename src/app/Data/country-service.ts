@@ -1,17 +1,15 @@
 import { Injectable } from '@angular/core'
-import type { HttpClient } from '@angular/common/http'
+import { HttpClient } from '@angular/common/http'
+import { Observable } from 'rxjs'
 
 @Injectable({
   providedIn: 'root'
 })
-export class CountryService {
-  constructor (private readonly http: HttpClient) {
-    this.fetchWorldInfo()
-  }
+export class CountryApiService {
+  constructor (private http: HttpClient) { }
 
-  fetchWorldInfo (): void {
-    // Implement your HTTP request logic here using this.http
-    // For example:
-    // this.http.get('your-api-endpoint').subscribe(data => console.log(data));
+  getCountryInformation (countryId: string): Observable<any> {
+    const apiUrl = `http://api.worldbank.org/v2/country/${countryId}?format=json`
+    return this.http.get(apiUrl)
   }
 }
