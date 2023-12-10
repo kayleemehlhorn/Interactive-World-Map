@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:world-map-project": "node dist/world-map-project/server/server.mjs",
-    "lint": "eslint --fix --ext .ts"
+    "eslint:fix": "node --max-old-space-size=8192 ./node_modules/eslint/bin/eslint.js -f ./eslint-formatter.js --cache \"{deploy,src,test}/**/*.ts\" --fix"
   },
   "private": true,
   "dependencies": {
