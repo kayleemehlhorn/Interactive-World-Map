@@ -22,6 +22,8 @@ module.exports = {
         "sourceType": "module"
     },
     "rules": {
-        '@typescript-eslint/no-non-null-assertion': 'off'
+        '@typescript-eslint/no-non-null-assertion': 'off',
+        '@typescript-eslint/consistent-type-imports': 'off'
+
     }
 }
