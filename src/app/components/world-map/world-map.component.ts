@@ -12,14 +12,17 @@ export class WorldMapComponent {
   private title: string = ''
   setWorldMapInfo (event: MouseEvent): void {
     const svgPathElement = event.target as SVGElement
-    this.id = svgPathElement.id
-    this.title = svgPathElement.getAttribute('title')!
+
+    if (svgPathElement.id !== undefined) {
+      this.id = svgPathElement.id
+      this.title = svgPathElement.getAttribute('title')!
+    }
 
     console.log({ id: this.id, title: this.title })
   }
 
-  async getCountry (svgCountry: SVGPathElement) {
-    const api: string = `https://api.worldbank.org/V2/country/'+svgCountry.id+'?format=json`
+  async getCountry (svgCountry: SVGPathElement): Promise<void> {
+    const api: string = 'https://api.worldbank.org/V2/country/\'+svgCountry.id+\'?format=json'
     const res: Response = await fetch(api)
     const data: any = await res.json()
     const dataPath: any = data[1]
