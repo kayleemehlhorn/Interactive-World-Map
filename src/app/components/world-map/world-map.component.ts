@@ -1,49 +1,42 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
+import { CountryApiService } from '../../Data/country-service'
 
 @Component({
   selector: 'app-world-map',
-  standalone: true,
-  imports: [],
   templateUrl: './world-map.component.html',
   styleUrls: ['./world-map.component.scss']
 })
-export class WorldMapComponent {
+export class WorldMapComponent implements OnInit {
   private id: string = ''
   private title: string = ''
-  setWorldMapInfo (event: MouseEvent): void {
+
+  constructor (private readonly countryApiService: CountryApiService) {}
+
+  ngOnInit (): void {
+    // Initialization logic if needed
+  }
+
+  async setWorldMapInfo (event: MouseEvent): Promise<void> {
     const svgPathElement = event.target as SVGElement
 
     if (svgPathElement.id !== undefined) {
       this.id = svgPathElement.id
       this.title = svgPathElement.getAttribute('title')!
+      await this.getCountryInformation(this.id)
     }
-
-    console.log({ id: this.id, title: this.title })
   }
 
-  async getCountry (svgCountry: SVGPathElement): Promise<void> {
-    const api: string = 'https://api.worldbank.org/V2/country/\'+svgCountry.id+\'?format=json'
-    const res: Response = await fetch(api)
-    const data: any = await res.json()
-    const dataPath: any = data[1]
-    console.log(dataPath[0])
+  async getCountryInformation (id: string): Promise<void> {
+    try {
+      const countryData = await this.countryApiService.getCountryInformation(id).toPromise()
 
-    const name: string = dataPath[0].name
-    document.getElementById('name')!.innerText = name
+      console.log(countryData)
 
-    const capital: string = dataPath[0].capitalCity
-    document.getElementById('capital')!.innerText = capital
-
-    const region: string = dataPath[0].region.value
-    document.getElementById('region')!.innerText = region
-
-    const income: string = dataPath[0].incomeLevel.value
-    document.getElementById('income')!.innerText = income
-
-    const latitude: string = dataPath[0].latitude
-    document.getElementById('latitude')!.innerText = latitude
-
-    const longitude: string = dataPath[0].longitude
-    document.getElementById('longitude')!.innerText = longitude
+      const name: string = countryData[1][0].name
+      document.getElementById('name')!.innerText = name
+      // Repeat similar steps for other properties
+    } catch (error) {
+      console.error('Error fetching country information', error)
+    }
   }
 }
