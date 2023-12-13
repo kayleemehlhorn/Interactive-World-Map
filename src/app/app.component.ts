@@ -1,14 +1,13 @@
 import { Component } from '@angular/core'
-import { CommonModule } from '@angular/common'
 import { WorldMapComponent } from './components/world-map/world-map.component'
 
 @Component({
   selector: 'app-root',
+  imports: [WorldMapComponent],
   standalone: true,
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
-  imports: [CommonModule, WorldMapComponent]
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'world-map'
+  title = 'app-world-map'
 }

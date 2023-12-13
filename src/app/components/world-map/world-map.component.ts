@@ -4,6 +4,7 @@ import { CountryApiService } from '../../Data/country-service'
 @Component({
   selector: 'app-world-map',
   templateUrl: './world-map.component.html',
+  standalone: true,
   styleUrls: ['./world-map.component.scss']
 })
 export class WorldMapComponent implements OnInit {
