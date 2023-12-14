@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
-import { Observable } from 'rxjs'
+import { Observable, Subject } from 'rxjs'
 
 @Injectable({
   providedIn: 'root'
@@ -13,34 +13,21 @@ export class CountryApiService {
     return this.http.get(apiUrl)
   }
 
-  async setCountryInformation (id: string): Promise<void> {
-    try {
-      const api: string = `https://api.worldbank.org/V2/country/${id}?format=json`
-      const res: Response = await fetch(api)
-      const data: any = await res.json()
+  setCountryInformation (id: string): Observable<any> {
+    const subject = new Subject()
 
-      const dataPath: any = data[1]
-      console.log(data)
+    this.getCountryInformation(id).subscribe((data: any) => {
+      const countryInfo = {
+        name: data[1][0].name,
+        capital: data[1][0].capitalCity,
+        region: data[1][0].region.value,
+        incomeLevel: data[1][0].incomeLevel.value,
+        latitude: data[1][0].latitude,
+        longitude: data[1][0].longitude
+      }
+      subject.next(countryInfo)
+    })
 
-      const name: string = dataPath[0].name
-      document.getElementById('name')!.innerText = name
-
-      const capital: string = dataPath[0].capitalCity
-      document.getElementById('capital')!.innerText = capital
-
-      const region: string = dataPath[0].region.value
-      document.getElementById('region')!.innerText = region
-
-      const income: string = dataPath[0].incomeLevel.value
-      document.getElementById('income')!.innerText = income
-
-      const latitude: string = dataPath[0].latitude
-      document.getElementById('latitude')!.innerText = latitude
-
-      const longitude: string = dataPath[0].longitude
-      document.getElementById('longitude')!.innerText = longitude
-    } catch (error) {
-      console.error('Error fetching country information:', error)
-    }
+    return subject.asObservable()
   }
 }

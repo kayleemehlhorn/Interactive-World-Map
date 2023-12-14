@@ -1550,16 +1550,19 @@
 </svg>
 </section>
 <section class="world-info">
-   <div>
-      <h3><u>World Information:</u></h3>
-      <ul>
-      <li><p>Country Name:</p></li>
-      <li><p>Country Capital:</p></li>
-      <li><p>Country Region:</p></li>
-      <li><p>Income Level:</p></li>
-      <li><p>Longitude:</p></li>
-      <li><p>Latitude:</p></li>
-      </ul>
-   </div>
+   <!-- world-map.component.html -->
+
+<!-- world-map.component.html -->
+
+<div>
+   <h2>{{ countryInformation?.[1]?.[0]?.name || 'N/A' }}</h2>
+   <p>Capital: {{ countryInformation?.[1]?.[0]?.capitalCity || 'N/A' }}</p>
+   <p>Region: {{ countryInformation?.[1]?.[0]?.region?.value || 'N/A' }}</p>
+   <p>Income Level: {{ countryInformation?.[1]?.[0]?.incomeLevel?.value || 'N/A' }}</p>
+   <p>Latitude: {{ countryInformation?.[1]?.[0]?.latitude || 'N/A' }}</p>
+   <p>Longitude: {{ countryInformation?.[1]?.[0]?.longitude || 'N/A' }}</p>
+ </div>
+ 
+ 
 </section>
 </main>

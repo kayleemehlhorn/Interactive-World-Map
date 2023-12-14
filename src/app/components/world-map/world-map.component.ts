@@ -10,11 +10,15 @@ import { CountryApiService } from '../../Data/country-service'
 export class WorldMapComponent implements OnInit {
   private id: string = ''
   private title: string = ''
+  countryInformation: any
 
   constructor (private readonly countryApiService: CountryApiService) {}
 
   ngOnInit (): void {
-    // Initialization logic if needed
+    const countryId = ''
+    this.countryApiService.setCountryInformation(countryId).subscribe((countryInfo: any) => {
+      // Your logic here
+    })
   }
 
   async setWorldMapInfo (event: MouseEvent): Promise<void> {
@@ -27,17 +31,10 @@ export class WorldMapComponent implements OnInit {
     }
   }
 
-  async getCountryInformation (id: string): Promise<void> {
-    try {
-      const countryData = await this.countryApiService.getCountryInformation(id).toPromise()
-
-      console.log(countryData)
-
-      const name: string = countryData[1][0].name
-      document.getElementById('name')!.innerText = name
-      // Repeat similar steps for other properties
-    } catch (error) {
-      console.error('Error fetching country information', error)
-    }
+  private getCountryInformation (countryId: string): void {
+    this.countryApiService.setCountryInformation(countryId).subscribe((countryInfo: any) => {
+      console.log(countryInfo)
+      this.countryInformation = countryInfo
+    })
   }
 }
