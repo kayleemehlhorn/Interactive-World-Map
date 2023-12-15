@@ -10,7 +10,7 @@ import { CountryApiService, WorldBankResponseShape } from '../../Data/country-se
 export class WorldMapComponent {
   private id: string | undefined
   private title: string | undefined
-  private countryInformation: WorldBankResponseShape | undefined
+  countryInformation: WorldBankResponseShape | undefined
 
   constructor (private readonly countryApiService: CountryApiService) {}
 

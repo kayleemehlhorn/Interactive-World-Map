@@ -1550,19 +1550,17 @@
 </svg>
 </section>
 <section class="world-info">
-   <!-- world-map.component.html -->
-
-<!-- world-map.component.html -->
-
-<!-- <div>
-   <h2>{{ countryInformation?.[1]?.[0]?.name || 'N/A' }}</h2>
-   <p>Capital: {{ countryInformation?.[1]?.[0]?.capitalCity || 'N/A' }}</p>
-   <p>Region: {{ countryInformation?.[1]?.[0]?.region?.value || 'N/A' }}</p>
-   <p>Income Level: {{ countryInformation?.[1]?.[0]?.incomeLevel?.value || 'N/A' }}</p>
-   <p>Latitude: {{ countryInformation?.[1]?.[0]?.latitude || 'N/A' }}</p>
-   <p>Longitude: {{ countryInformation?.[1]?.[0]?.longitude || 'N/A' }}</p>
- </div> -->
  
- 
-</section>
-</main>
+<!-- Country Information is shown with Html and binded to the api call -->
+<div async as countryInformation>
+   <h2><u><strong>Country Information:</strong></u></h2>
+   <ul>
+     <li><strong>Country:</strong> {{ countryInformation?.name }}</li>
+     <li><strong>Capital:</strong> {{ countryInformation?.capitalCity }}</li>
+     <li><strong>Region:</strong> {{ countryInformation?.region?.value }}</li>
+     <li><strong>Income Level:</strong> {{ countryInformation?.incomeLevel?.value }}</li>
+     <li><strong>Latitude:</strong> {{ countryInformation?.latitude }}</li>
+     <li><strong>Longitude:</strong> {{ countryInformation?.longitude }}</li>
+   </ul>
+ </div>
+ </section>
